@@ -1,9 +1,22 @@
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Footer from './Component/Footer/Footer';
+import Home from './Component/Home/Home';
+import Navbar from './Component/Navbar/Navbar';
+
 function App() {
   return (
-    <div>
-       <h1 className='text-center text-purple-500 font-bold'>Hello sakib</h1>
-    </div>
+    <Router>
+      <Navbar />
+
+      <Switch>
+        <Route exact path='/'>
+          <Home/>
+        </Route>
+
+      </Switch>
+      <Footer/>
+    </Router>
   );
 }
 
