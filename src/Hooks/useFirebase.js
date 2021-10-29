@@ -1,6 +1,10 @@
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { useEffect, useState } from "react";
+import FirebaseInitial from '../Firebase/Firebase.initialize';
 
+
+// app initialize
+FirebaseInitial()
 // google auth 
 const auth =getAuth();
 const useFirebase=()=>{
@@ -12,6 +16,7 @@ const useFirebase=()=>{
             if (user) {
               // User is signed in, see docs for a list of available properties
               setUser(user)
+              console.log(user);
             } else {
               // User is signed out
               setUser({})

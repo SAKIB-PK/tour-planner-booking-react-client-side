@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { FirebaseContext } from '../../Context/FirebaseAuth'
 
 const Navbar = () => {
     const [show,setShow] =useState(false)
+    const {logOut,user}=useContext(FirebaseContext)
+
     return (
         // <!-- Navbar goes here -->
 		<nav className="bg-white shadow-lg">
@@ -22,12 +25,32 @@ const Navbar = () => {
 							<NavLink to='/services' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</NavLink>
 							<NavLink to='/about' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</NavLink>
 							<NavLink to='/contact' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</NavLink>
+							{(user?.email || user?.displayName )&&
+							<>
+								<NavLink to='/add' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Add Service</NavLink>
+
+
+
+
+							</>
+							}
 						</div>
 					</div>
 					{/* <!-- Secondary Navbar items --> */}
 					<div className="hidden md:flex items-center space-x-3 ">
-						<NavLink to='/login' className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log In</NavLink>
-						<NavLink to='/signin' className="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</NavLink>
+						{ (user?.email || user?.displayName )?
+							<>
+								<img src={user?.photoURL} className='navbar-circle' alt="" />
+								<span>{user?.displayName}</span>
+								<button onClick={logOut} className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log out</button>
+							</>
+
+						:
+							<>
+							<NavLink to='/login' className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log In</NavLink>
+							<NavLink to='/signin' className="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</NavLink>
+							</>
+							}
 					</div>
 					{/* <!-- Mobile menu button --> */}
 					<div className="md:hidden flex items-center">
