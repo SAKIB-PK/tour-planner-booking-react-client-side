@@ -3,6 +3,7 @@ import './App.css';
 import About from './Component/About/About';
 import AddService from './Component/AddService/AddService';
 import Contact from './Component/Contact/Contact';
+import ErrorPage from './Component/Error/ErrorPage';
 import Footer from './Component/Footer/Footer';
 import Home from './Component/Home/Home';
 import Login from './Component/Login/Login';
@@ -43,6 +44,9 @@ function App() {
         </Route>
         <Route path='/about'>
           <About/>
+        </Route>
+        <Route path='*'>
+          <ErrorPage/>
         </Route>
 
       </Switch>
