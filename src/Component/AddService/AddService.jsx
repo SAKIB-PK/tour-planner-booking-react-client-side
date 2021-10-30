@@ -1,13 +1,37 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react';
 
 const AddService = () => {
+    const [name,setName]= useState('')
+    const [img,setImg]= useState('')
+    const [desc,setDesc]= useState('')
+
+    const hundleName =(e)=>{
+        setName(e.target.value)
+    }
+    const hundleImg =(e)=>{
+        setImg(e.target.value)
+    }
+    const hundleDesc =(e)=>{
+        setDesc(e.target.value)
+    }
+    const hundlePost = ()=>{
+        const data = {
+            title:name,
+            photo:img,
+            description:desc
+        }
+        // database insert post call 
+        axios.post('http://localhost:5000/services',data)
+        .then(result =>console.log(result.data))
+    }
     return (
         <>
         <div className="heading text-center font-bold text-2xl m-5 text-gray-800">New Post</div>
             <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-                <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text"/>
-                <input className="img-link bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Image Link" type="text"/>
-                <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Short Describe  about this post here"></textarea>
+                <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text" onBlur={hundleName}/>
+                <input className="img-link bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Image Link" type="text" onBlur={hundleImg}/>
+                <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Short Describe  about this post here" onBlur={hundleDesc} ></textarea>
                 
                 {/* <!-- icons --> */}
                 <div className="icons flex text-gray-500 m-2">
@@ -19,7 +43,7 @@ const AddService = () => {
                 {/* <!-- buttons --> */}
                 <div className="buttons flex">
                 <div className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</div>
-                <div className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">Post</div>
+                <div className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500" onClick={hundlePost}>Post</div>
              </div>
         </div>
 

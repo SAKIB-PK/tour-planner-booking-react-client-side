@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { useEffect, useState } from "react";
 import FirebaseInitial from '../Firebase/Firebase.initialize';
 
@@ -9,11 +9,14 @@ FirebaseInitial()
 const auth =getAuth();
 const useFirebase=()=>{
     const [user,setUser] = useState({})
+    const [isLoading,setLoading] = useState(false)
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     useEffect(()=>{
         onAuthStateChanged(auth, (user) => {
             if (user) {
+              setLoading(true)
               // User is signed in, see docs for a list of available properties
               setUser(user)
               console.log(user);
@@ -21,6 +24,7 @@ const useFirebase=()=>{
               // User is signed out
               setUser({})
             }
+            setLoading(false)
           });
     },[])
 
@@ -42,10 +46,14 @@ const useFirebase=()=>{
           }).catch((error) => {
             // An error occurred
             // ...
-          });
+          })
+          .finally(()=> setLoading(false))
     }
     const GoogleSignIn =()=>{
         return signInWithPopup(auth,googleProvider)
+    }
+    const GithubSignIn =()=>{
+        return signInWithPopup(auth,githubProvider)
     }
     const logOut = ()=>{
         signOut(auth).then(() => {
@@ -63,7 +71,10 @@ const useFirebase=()=>{
     return {
         user,
         setUser,
+        isLoading,
+        setLoading,
         GoogleSignIn,
+        GithubSignIn,
         updateProfileInfo,
         customSignIn,
         customLogin,
