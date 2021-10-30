@@ -27,7 +27,7 @@ const AddService = () => {
             description:desc
         }
         // database insert post call 
-        axios.post('http://localhost:5000/services',data)
+        axios.post('https://secure-waters-99049.herokuapp.com/services',data)
         .then(result =>{
             if(result.data.insertedId){
                 setDistrict('')

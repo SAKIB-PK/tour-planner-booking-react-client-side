@@ -1,19 +1,10 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import Service from '../Service/Service'
+import React from 'react';
+import usePost from '../../Hooks/usePost';
+import Service from '../Service/Service';
 
-const Services = () => {
-    const [posts,setPosts] = useState([])
-    useEffect(()=>{
-        axios.get('https://secure-waters-99049.herokuapp.com/services')
-        .then(res => {
-            const shortPosts = res.data?.splice(0,6)
-            setPosts(shortPosts)
-        })
-        .catch(err=>{
-            ///
-        })
-    },[])
+const Services = ({item}) => {
+    const {posts} = usePost() 
+    const shortPost = posts.slice(0,item)   
     return (
         <div className="bg-gray-100">
             <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
@@ -25,7 +16,8 @@ const Services = () => {
             </div>
             
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {
+                    { item ?
+                        shortPost.map(post => <Service key={post._id} item ={post} />):
                         posts.map(post => <Service key={post._id} item ={post} />)
                     }
                 </div>
