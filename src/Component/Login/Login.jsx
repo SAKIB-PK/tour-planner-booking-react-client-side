@@ -4,7 +4,7 @@ import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { FirebaseContext } from '../../Context/FirebaseAuth';
 
 const Login = () => {
-    const {GoogleSignIn,setUser,customLogin,GithubSignIn}=useContext(FirebaseContext)
+    const {GoogleSignIn,setUser,customLogin,GithubSignIn,setLoading}=useContext(FirebaseContext)
     let history = useHistory();
     let location = useLocation();
   
@@ -15,12 +15,14 @@ const Login = () => {
         const {email,password}=data
         customLogin(email,password)
         .then(res=>{
+            setLoading(true)
             setUser(res.user)
             history.push(from)
         })
         .catch(err=>{
             ///
         })
+        .finally(()=> setLoading(false))
     };
 
 
@@ -28,21 +30,27 @@ const Login = () => {
     const hundleGoogle =()=>{
         GoogleSignIn()
         .then(result =>{
+            setLoading(true)
             setUser(result.user)
+            history.push(from)
         })
         .catch(err=>{
             // err message show
         })
+        .finally(()=> setLoading(false))
     }
     // hundle google login
     const hundleGithub =()=>{
         GithubSignIn()
         .then(result =>{
+            setLoading(true)
             setUser(result.user)
+            history.push(from)
         })
         .catch(err=>{
             // err message show
         })
+        .finally(()=> setLoading(false))
     }
     return (
         <div className="flex justify-center min-h-screen bg-gray-100"> 

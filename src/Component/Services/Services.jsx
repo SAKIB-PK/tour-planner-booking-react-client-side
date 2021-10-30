@@ -1,9 +1,13 @@
 import React from 'react';
 import usePost from '../../Hooks/usePost';
+import Loading from '../Loading/Loading';
 import Service from '../Service/Service';
 
 const Services = ({item}) => {
     const {posts} = usePost() 
+    if(posts.length===0){
+        return <Loading/>
+    }
     const shortPost = posts.slice(0,item)   
     return (
         <div className="bg-gray-100">

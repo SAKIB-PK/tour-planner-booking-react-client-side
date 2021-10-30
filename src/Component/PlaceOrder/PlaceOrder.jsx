@@ -6,8 +6,6 @@ import OrderItem from '../OrderItem/OrderItem';
 const PlaceOrder = () => {
     const {id} = useParams()
     const {user} = useContext(FirebaseContext)
-    console.log(user)
-
     return (
         <>
             <div className="relative min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-200 bg-no-repeat bg-cover  "

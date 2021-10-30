@@ -1,21 +1,28 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory, useLocation } from 'react-router-dom'
 import { FirebaseContext } from '../../Context/FirebaseAuth'
 
 const Registration = () => {
-    const {GoogleSignIn,setUser,customSignIn,updateProfileInfo}=useContext(FirebaseContext)
+    const {GoogleSignIn,setUser,customSignIn,updateProfileInfo,setLoading}=useContext(FirebaseContext)
+    let history = useHistory();
+    let location = useLocation();
+  
+    let { from } = location.state || { from: { pathname: "/" } };
     const { register, handleSubmit } = useForm();
     const onSubmit = (data,e) => {
         const {email,password,name,img} = data
         customSignIn(email,password)
         .then(res=>{
+            setLoading(true)
             setUser(res.user)
             updateProfileInfo(name,img)
+            history.push(from)
         })
         .catch(err=>{
             ///
         })
+        .finally(()=>setLoading(false))
         e.target.reset()
     };
 
@@ -23,11 +30,14 @@ const Registration = () => {
     const hundleGoogle = ()=>{
         GoogleSignIn()
         .then(result =>{
+            setLoading(true)
             setUser(result.user)
+            history.push(from)
         })
         .catch(err=>{
             // err message show
         })
+        .finally(()=> setLoading(false))
     }
 
     return (

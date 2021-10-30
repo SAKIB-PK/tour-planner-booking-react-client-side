@@ -1,9 +1,13 @@
 import React, { useContext } from 'react'
 import { Redirect, Route } from 'react-router'
 import { FirebaseContext } from '../../Context/FirebaseAuth'
+import Loading from '../Loading/Loading'
 
 const PrivateRoute = ({children,...rest}) => {
-    const {user} = useContext(FirebaseContext)
+    const {user,isLoading} = useContext(FirebaseContext)
+    if(isLoading){
+      return <Loading/>
+    }
     return (
         <Route
       {...rest}
