@@ -3,9 +3,9 @@ import './Loading.css'
 
 const Loading = () => {
     return (
-            <div class="flex justify-center items-center my-4">
+            <div className="flex justify-center items-center my-4">
                 <div
-                    class="
+                    className="
                     loader
                     ease-linear
                     rounded-full
