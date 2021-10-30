@@ -1,16 +1,22 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { FirebaseContext } from '../../Context/FirebaseAuth';
 
 const Login = () => {
     const {GoogleSignIn,setUser,customLogin,GithubSignIn}=useContext(FirebaseContext)
+    let history = useHistory();
+    let location = useLocation();
+  
+    let { from } = location.state || { from: { pathname: "/" } };
+   
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data =>{
         const {email,password}=data
         customLogin(email,password)
         .then(res=>{
             setUser(res.user)
+            history.push(from)
         })
         .catch(err=>{
             ///

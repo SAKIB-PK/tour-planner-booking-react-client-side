@@ -15,13 +15,13 @@ const Navbar = () => {
 						<div>
 							{/* <!-- Website Logo --> */}
 							<NavLink to='/' className="flex items-center py-4 px-2">
-								<img src="logo.png" alt="Logo" className="h-8 w-8 mr-2"/>
+								<img src="img/tour.png" alt="Logo" className="h-8 w-8 mr-2"/>
 								<span className="font-semibold text-gray-500 text-lg">Tourist</span>
 							</NavLink>
 						</div>
 						{/* <!-- Primary Navbar items --> */}
 						<div className="hidden md:flex items-center space-x-1">
-							<NavLink to='/' className="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Home</NavLink>
+							<NavLink to='/' className="py-4 px-2 text-green-500  font-semibold ">Home</NavLink>
 							<NavLink to='/services' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</NavLink>
 							<NavLink to='/about' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</NavLink>
 							<NavLink to='/contact' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</NavLink>
@@ -77,6 +77,21 @@ const Navbar = () => {
 					<li><NavLink to="/services" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Services</NavLink></li>
 					<li><NavLink to="/about" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</NavLink></li>
 					<li><NavLink to="/contact" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</NavLink></li>
+					{ (user?.email || user?.displayName )?
+							<>
+								<div className='flex space-x-3'>
+									<img src={user?.photoURL} className='navbar-circle my-3 mx-3' alt="" />
+									<span className='my-4'>{user?.displayName}</span>
+								</div>
+								<button onClick={logOut} className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log out</button>
+							</>
+
+						:
+							<>
+							<NavLink to='/login' className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log In</NavLink>
+							<NavLink to='/register' className="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</NavLink>
+							</>
+							}
 				</ul>
 			</div>
 		</nav>

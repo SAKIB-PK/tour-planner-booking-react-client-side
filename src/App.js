@@ -5,6 +5,7 @@ import Footer from './Component/Footer/Footer';
 import Home from './Component/Home/Home';
 import Login from './Component/Login/Login';
 import Navbar from './Component/Navbar/Navbar';
+import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
 import Registration from './Component/Registration/Registration';
 import Services from './Component/Services/Services';
 import FirebaseAuth from './Context/FirebaseAuth';
@@ -25,9 +26,9 @@ function App() {
         <Route path='/register'>
           <Registration/>
         </Route>
-        <Route path='/services'>
+        <PrivateRoute path='/services'>
           <Services/>
-        </Route>
+        </PrivateRoute>
         <Route path='/add'>
           <AddService/>
         </Route>

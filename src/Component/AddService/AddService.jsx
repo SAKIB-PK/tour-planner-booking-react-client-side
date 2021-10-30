@@ -5,6 +5,7 @@ const AddService = () => {
     const [name,setName]= useState('')
     const [img,setImg]= useState('')
     const [desc,setDesc]= useState('')
+    const [district,setDistrict]= useState('')
 
     const hundleName =(e)=>{
         setName(e.target.value)
@@ -15,15 +16,27 @@ const AddService = () => {
     const hundleDesc =(e)=>{
         setDesc(e.target.value)
     }
+    const hundleDistrict =(e)=>{
+        setDistrict(e.target.value)
+    }
     const hundlePost = ()=>{
         const data = {
             title:name,
             photo:img,
+            district:district,
             description:desc
         }
         // database insert post call 
         axios.post('http://localhost:5000/services',data)
-        .then(result =>console.log(result.data))
+        .then(result =>{
+            if(result.data.insertedId){
+                setDistrict('')
+                setImg('')
+                setName('')
+                setDesc('')
+                alert('Data Inserted Succesfully! ')
+            }
+        })
     }
     return (
         <>
@@ -31,6 +44,7 @@ const AddService = () => {
             <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
                 <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text" onBlur={hundleName}/>
                 <input className="img-link bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Image Link" type="text" onBlur={hundleImg}/>
+                <input className="district bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Place District Name" type="text" onBlur={hundleDistrict}/>
                 <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Short Describe  about this post here" onBlur={hundleDesc} ></textarea>
                 
                 {/* <!-- icons --> */}

@@ -19,7 +19,6 @@ const useFirebase=()=>{
               setLoading(true)
               // User is signed in, see docs for a list of available properties
               setUser(user)
-              console.log(user);
             } else {
               // User is signed out
               setUser({})
