@@ -46,21 +46,21 @@ const Contact = () => {
 
                     <form className = "p-6 flex flex-col justify-center">
                         <div className = "flex flex-col">
-                            <label for="name" className = "hidden">Full Name</label>
+                            <label htmlFor="name" className = "hidden">Full Name</label>
                             <input type="name" name="name" id="name" placeholder="Full Name" className = "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"/>
                         </div>
 
                         <div className = "flex flex-col mt-2">
-                            <label for="email" className = "hidden">Email</label>
+                            <label htmlFor="email" className = "hidden">Email</label>
                             <input type="email" name="email" id="email" placeholder="Email" className = "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"/>
                         </div>
 
                         <div className = "flex flex-col mt-2">
-                            <label for="tel" className = "hidden">Number</label>
+                            <label htmlFor="tel" className = "hidden">Number</label>
                             <input type="tel" name="tel" id="tel" placeholder="Telephone Number" className = "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"/>
                         </div>
                         <div className = "flex flex-col mt-2">
-                            <label for="tel" className = "hidden">Message</label>
+                            <label htmlFor="tel" className = "hidden">Message</label>
                             <textarea type="text" placeholder="Type your Message..." className = "w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none" rows='4'></textarea>
                         </div>
 
