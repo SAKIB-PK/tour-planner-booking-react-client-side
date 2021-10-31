@@ -36,7 +36,10 @@ function App() {
         <PrivateRoute path='/place-order/:id'>
           <PlaceOrder />
         </PrivateRoute>
-        <Route path='/add'>
+        <Route exact path='/add'>
+          <AddService/>
+        </Route>
+        <Route path='/add/:id'>
           <AddService/>
         </Route>
         <Route path='/contact'>

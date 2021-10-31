@@ -14,7 +14,8 @@ const usePost = ()=>{
         })
     },[])
     return {
-        posts
+        posts,
+        setPosts
     }
 
 }
