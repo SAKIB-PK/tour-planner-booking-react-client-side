@@ -1,10 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { FirebaseContext } from '../../Context/FirebaseAuth'
 
 const Navbar = () => {
     const [show,setShow] =useState(false)
     const {logOut,user}=useContext(FirebaseContext)
+	useEffect(()=>{
+		// any device switch  mobile navbar show problem solved
+		window.addEventListener('resize',()=>setShow(window.screen.width < 768))
+	},[])
 
     return (
         // <!-- Navbar goes here -->
@@ -28,10 +32,8 @@ const Navbar = () => {
 							{(user?.email || user?.displayName )&&
 							<>
 								<NavLink to='/add' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Add Service</NavLink>
-
-
-
-
+								<NavLink to='/manage-order' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Manage order</NavLink>
+								<NavLink to='/manage-all-order' className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Manage all order</NavLink>
 							</>
 							}
 						</div>
@@ -79,6 +81,10 @@ const Navbar = () => {
 					<li><NavLink to="/contact" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</NavLink></li>
 					{ (user?.email || user?.displayName )?
 							<>
+
+								<li><NavLink to="/add" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Add New Service</NavLink></li>
+								<li><NavLink to="/manage-order" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Manage orders</NavLink></li>
+								<li><NavLink to="/manage-all-order" className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Manage all order</NavLink></li>
 								<div className='flex space-x-3'>
 									<img src={user?.photoURL} className='navbar-circle my-3 mx-3' alt="" />
 									<span className='my-4'>{user?.displayName}</span>

@@ -7,6 +7,8 @@ import ErrorPage from './Component/Error/ErrorPage';
 import Footer from './Component/Footer/Footer';
 import Home from './Component/Home/Home';
 import Login from './Component/Login/Login';
+import ManageAllOrder from './Component/ManageAllOrder/ManageAllOrder';
+import ManageOrder from './Component/ManageOrder/ManageOrder';
 import Navbar from './Component/Navbar/Navbar';
 import PlaceOrder from './Component/PlaceOrder/PlaceOrder';
 import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
@@ -47,6 +49,12 @@ function App() {
         </Route>
         <Route path='/about'>
           <About/>
+        </Route>
+        <Route path='/manage-order'>
+          <ManageOrder/>
+        </Route>
+        <Route path='/manage-all-order'>
+          <ManageAllOrder/>
         </Route>
         <Route path='*'>
           <ErrorPage/>
