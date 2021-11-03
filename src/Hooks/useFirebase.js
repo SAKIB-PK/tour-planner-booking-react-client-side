@@ -9,16 +9,16 @@ FirebaseInitial()
 const auth =getAuth();
 const useFirebase=()=>{
     const [user,setUser] = useState({})
-    const [isLoading,setLoading] = useState(false)
+    const [isLoading,setLoading] = useState(true)
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
 
     useEffect(()=>{
         onAuthStateChanged(auth, (user) => {
             if (user) {
-              setLoading(true)
-              // User is signed in, see docs for a list of available properties
+              setUser(true)
               setUser(user)
+              // User is signed in, see docs for a list of available properties
             } else {
               // User is signed out
               setUser({})
@@ -46,7 +46,6 @@ const useFirebase=()=>{
             // An error occurred
             // ...
           })
-          .finally(()=> setLoading(false))
     }
     const GoogleSignIn =()=>{
         return signInWithPopup(auth,googleProvider)

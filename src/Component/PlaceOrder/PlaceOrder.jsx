@@ -1,11 +1,28 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router';
 import { FirebaseContext } from '../../Context/FirebaseAuth';
+import usePost from '../../Hooks/usePost';
 import OrderItem from '../OrderItem/OrderItem';
 
 const PlaceOrder = () => {
     const {id} = useParams()
+    const {posts}  = usePost()
+    const filterPost = posts.filter(value => value._id === id)
     const {user} = useContext(FirebaseContext)
+    // const hundleDelete = (point)=>{
+    //     const procced =window.confirm('Are you Sure?')
+    //     if(procced){
+    //          axios.delete(`https://secure-waters-99049.herokuapp.com/services/${point}`)
+    //          .then(res=>{
+    //              if(res.data.deletedCount >0 ){
+    //                  alert('data Deleted Successfully.')
+    //              }
+    //              ///
+    //          })
+    //          const remainingPost = posts.filter(postsItem => postsItem._id !== point)
+    //          setPosts(remainingPost)
+    //     }
+    //  }
     return (
         <>
             <div className="relative min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-200 bg-no-repeat bg-cover  "
@@ -24,7 +41,7 @@ const PlaceOrder = () => {
                                 <div className="md:space-y-2 mb-3">
                                     <label className="text-xl font-semibold text-gray-600 py-2">Cart Item<abbr className="hidden" title="required">*</abbr></label>
                                     {/* Order item start */}
-                                     <OrderItem/>
+                                     <OrderItem item={filterPost[0]}/>
                                     </div>
                                     {/* Bellow Form Section  */}
                                     <div className="md:flex flex-row md:space-x-4 w-full text-xl">
