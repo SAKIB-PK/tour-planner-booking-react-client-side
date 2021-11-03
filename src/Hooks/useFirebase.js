@@ -16,8 +16,8 @@ const useFirebase=()=>{
     useEffect(()=>{
         onAuthStateChanged(auth, (user) => {
             if (user) {
-              setUser(true)
               setUser(user)
+              console.log(user)
               // User is signed in, see docs for a list of available properties
             } else {
               // User is signed out

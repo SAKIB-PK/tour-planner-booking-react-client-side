@@ -3,12 +3,11 @@ import usePost from '../../Hooks/usePost';
 import Loading from '../Loading/Loading';
 import Service from '../Service/Service';
 
-const Services = ({item}) => {
+const Services = () => {
     const {posts} = usePost() 
     if(posts.length===0){
         return <Loading/>
     }
-    const shortPost = posts.slice(0,item)   
     return (
         <div className="bg-gray-100">
             <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
@@ -20,8 +19,7 @@ const Services = ({item}) => {
             </div>
             
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    { item ?
-                        shortPost.map(post => <Service key={post._id} item ={post}/>):
+                    { 
                         posts.map(post => <Service key={post._id} item ={post} />)
                     }
                 </div>

@@ -7,8 +7,10 @@ const Login = () => {
     const {GoogleSignIn,setUser,customLogin,GithubSignIn,setLoading}=useContext(FirebaseContext)
     let history = useHistory();
     let location = useLocation();
+    console.log(location)
   
     let { from } = location.state || { from: { pathname: "/" } };
+    console.log(from)
    
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data =>{

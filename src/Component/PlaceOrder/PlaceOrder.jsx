@@ -40,8 +40,10 @@ const PlaceOrder = () => {
                             <div className="form">
                                 <div className="md:space-y-2 mb-3">
                                     <label className="text-xl font-semibold text-gray-600 py-2">Cart Item<abbr className="hidden" title="required">*</abbr></label>
-                                    {/* Order item start */}
-                                     <OrderItem item={filterPost[0]}/>
+                                    {/* Order item start */
+                                        filterPost.length >0 && <OrderItem item={filterPost[0]}/>
+                                    }
+                                     
                                     </div>
                                     {/* Bellow Form Section  */}
                                     <div className="md:flex flex-row md:space-x-4 w-full text-xl">

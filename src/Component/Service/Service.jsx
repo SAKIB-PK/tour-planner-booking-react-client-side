@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useLocalStroge from '../../Hooks/useLocalStorage.js'
+import useLocalStroge from '../../Hooks/useLocalStorage.js';
 
 const Service = ({item}) => {
     const {_id,title,photo,description,district}= item
     const {setLCStorage} = useLocalStroge()
-    // console.log({title,photo,description});
     const shortDescription = description.slice(0,200)
     return (
         <div className="w-full bg-white rounded-lg sahdow-lg overflow-hidden flex flex-col md:flex-row">
