@@ -6,12 +6,8 @@ import { FirebaseContext } from '../../Context/FirebaseAuth';
 const Login = () => {
     const {GoogleSignIn,setUser,customLogin,GithubSignIn,setLoading}=useContext(FirebaseContext)
     let history = useHistory();
-    let location = useLocation();
-    console.log(location)
-  
+    let location = useLocation();  
     let { from } = location.state || { from: { pathname: "/" } };
-    console.log(from)
-   
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data =>{
         const {email,password}=data
@@ -76,9 +72,9 @@ const Login = () => {
                         <label htmlFor="password" className="text-sm text-gray-600 dark:text-gray-400">Password</label>
                         <a href="#!" className="text-sm text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300">Forgot password?</a>
                     </div>
-                    <input type="password" name="password" id="password" placeholder="Your password" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"  {...register("password",{ required: true ,maxLength:6})}/>
+                    <input type="password" name="password" id="password" placeholder="Your password" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"  {...register("password",{ required: true ,minLength:6})}/>
                     {errors.password && <span className='text-red-500'>Password field is required</span>}
-                    {errors.password?.type === 'maxLength' && <span className='text-red-500'>Password must be 6 words.</span>}
+                    {errors.password?.type === 'minLength' && <span className='text-red-500'>Password must be 6 words.</span>}
                     </div>
                     <div className="mb-6">
                     <button type="submit" className="w-full px-3 py-4 text-white bg-gray-700 rounded-md hover:bg-gray-500 focus:outline-none duration-100 ease-in-out">Sign in</button>

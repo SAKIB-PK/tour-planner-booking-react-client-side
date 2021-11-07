@@ -2,50 +2,44 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 const AddService = () => {
-    const [name,setName]= useState('')
-    const [img,setImg]= useState('')
-    const [desc,setDesc]= useState('')
-    const [district,setDistrict]= useState('')
-
-    const hundleName =(e)=>{
-        setName(e.target.value)
-    }
-    const hundleImg =(e)=>{
-        setImg(e.target.value)
-    }
-    const hundleDesc =(e)=>{
-        setDesc(e.target.value)
-    }
-    const hundleDistrict =(e)=>{
-        setDistrict(e.target.value)
+    const [service,setService]=useState({
+            title:'',
+            photo:'',
+            district:'',
+            description:'',
+            price:''
+    })
+    const onInfoChange = async(e)=>{
+        setService({
+            ...service,[e.target.name]:e.target.value
+        })
     }
     const hundlePost = ()=>{
-        const data = {
-            title:name,
-            photo:img,
-            district:district,
-            description:desc
-        }
         // database insert post call 
-        axios.post('https://secure-waters-99049.herokuapp.com/services',data)
+        axios.post('https://secure-waters-99049.herokuapp.com/services',service)
         .then(result =>{
             if(result.data.insertedId){
-                setDistrict('')
-                setImg('')
-                setName('')
-                setDesc('')
                 alert('Data Inserted Succesfully! ')
+                setService({
+                    title:'',
+                    photo:'',
+                    district:'',
+                    description:'',
+                    price:'',
+            })
             }
         })
     }
+    const {title,photo,district,description,price}= service
     return (
         <>
         <div className="heading text-center font-bold text-2xl m-5 text-gray-800">New Post</div>
             <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-                <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text" onBlur={hundleName}/>
-                <input className="img-link bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Image Link" type="text" onBlur={hundleImg}/>
-                <input className="district bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Place District Name" type="text" onBlur={hundleDistrict}/>
-                <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Short Describe  about this post here" onBlur={hundleDesc} ></textarea>
+                <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text" name='title' value={title} onChange={(e)=>onInfoChange(e)}/>
+                <input className="img-link bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Image Link" type="text"name='photo' value={photo} onChange={(e)=>onInfoChange(e)}/>
+                <input className="district bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Place District Name" type="text" name='district' value={district} onChange={(e)=>onInfoChange(e)}/>
+                <input className="price bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" type="number" name='price' placeholder='price your Service' value={price} onChange={(e)=>onInfoChange(e)}/>
+                <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Short Describe  about this post here"onChange={(e)=>onInfoChange(e)} name='description' value={description}></textarea>
                 
                 {/* <!-- icons --> */}
                 <div className="icons flex text-gray-500 m-2">

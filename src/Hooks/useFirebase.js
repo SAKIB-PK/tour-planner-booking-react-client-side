@@ -14,10 +14,9 @@ const useFirebase=()=>{
     const githubProvider = new GithubAuthProvider();
 
     useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
+      const updateProfileAuth =onAuthStateChanged(auth, (user) => {
             if (user) {
               setUser(user)
-              console.log(user)
               // User is signed in, see docs for a list of available properties
             } else {
               // User is signed out
@@ -25,6 +24,7 @@ const useFirebase=()=>{
             }
             setLoading(false)
           });
+          return ()=> updateProfileAuth
     },[])
 
 

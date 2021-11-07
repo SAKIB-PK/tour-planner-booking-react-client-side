@@ -3,6 +3,7 @@ import usePost from '../../Hooks/usePost'
 import About from '../About/About'
 import Banner from '../Banner/Banner'
 import Contact from '../Contact/Contact'
+import Loading from '../Loading/Loading'
 import Service from '../Service/Service'
 
 const Home = () => {
@@ -21,8 +22,10 @@ const Home = () => {
                     </div>
                     
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {
+                            {homePost.length>0?
                                 homePost.map(post => <Service key={post._id} item ={post} />)
+                                :
+                                <Loading/>
                             }
                         </div>
                     </section>      

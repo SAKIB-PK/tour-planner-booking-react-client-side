@@ -18,7 +18,7 @@ import FirebaseAuth from './Context/FirebaseAuth';
 
 function App() {
   return (
-   <FirebaseAuth>
+    <FirebaseAuth>
       <Router>
       <Navbar />
 
@@ -41,21 +41,21 @@ function App() {
         <Route exact path='/add'>
           <AddService/>
         </Route>
-        <Route path='/add/:id'>
+        <PrivateRoute path='/add/:id'>
           <AddService/>
-        </Route>
+        </PrivateRoute>
         <Route path='/contact'>
           <Contact/>
         </Route>
         <Route path='/about'>
           <About/>
         </Route>
-        <Route path='/manage-order'>
+        <PrivateRoute path='/manage-order'>
           <ManageOrder/>
-        </Route>
-        <Route path='/manage-all-order'>
+        </PrivateRoute>
+        <PrivateRoute path='/manage-all-order'>
           <ManageAllOrder/>
-        </Route>
+        </PrivateRoute>
         <Route path='*'>
           <ErrorPage/>
         </Route>
@@ -63,7 +63,7 @@ function App() {
       </Switch>
       <Footer/>
     </Router>
-   </FirebaseAuth>
+</FirebaseAuth>
   );
 }
 

@@ -9,8 +9,8 @@ const Registration = () => {
     let location = useLocation();
   
     let { from } = location.state || { from: { pathname: "/" } };
-    const { register, handleSubmit } = useForm();
-    const onSubmit = (data,e) => {
+    const { register, handleSubmit,reset } = useForm();
+    const onSubmit = (data) => {
         const {email,password,name,img} = data
         customSignIn(email,password)
         .then(res=>{
@@ -23,7 +23,7 @@ const Registration = () => {
             ///
         })
         .finally(()=>setLoading(false))
-        e.target.reset()
+        reset()
     };
 
 
