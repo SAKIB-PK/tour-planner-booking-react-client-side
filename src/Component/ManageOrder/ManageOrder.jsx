@@ -53,7 +53,6 @@ const ManageOrder = () => {
             //
         })
     }
-    console.log(user)
     // loading check component render 
     if(loading ){
         return <Loading/>
